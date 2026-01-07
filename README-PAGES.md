@@ -8,6 +8,8 @@ This repository publishes a static site with:
 
 > **Enable Pages** → *Settings* → *Pages* → **Source: GitHub Actions**. On push to `main`/`master`, the site builds and deploys automatically.
 
+> **⚠️ Important:** This repository uses **GitHub Pages** for deployment, NOT Vercel. The `vercel.json` file explicitly disables Vercel deployments. If you see Vercel bot notifications, they should be ignored or the Vercel integration should be removed from the repository settings.
+
 ---
 
 ## Teknia Token (TT) System v3.14

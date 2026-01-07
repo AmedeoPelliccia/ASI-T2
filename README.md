@@ -46,6 +46,7 @@ canonical_hash: pending
 - [Evidence Objects](#evidence-objects)
 - [Conformance Ladder](#conformance-ladder)
 - [Roadmap Phases](#roadmap-phases)
+- [Deployment & GitHub Pages](./DEPLOYMENT.md)
 - [Contact & Pilots](#contact-pilots)
 - [Link Map](#link-map-for-clustered-keywords)
 
