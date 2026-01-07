@@ -80,8 +80,10 @@ The JSON endpoint follows the [Shields.io endpoint schema](https://shields.io/en
 Use in documentation:
 
 ```markdown
-![Teknia TT Balance](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/AmedeoPelliccia/ASI-T2/main/finance/badges/tt-balance.json)
+![Teknia TT Balance](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/YOUR-USERNAME/YOUR-REPO/main/finance/badges/tt-balance.json)
 ```
+
+Replace `YOUR-USERNAME/YOUR-REPO` with your actual GitHub repository path (e.g., `AmedeoPelliccia/ASI-T2`).
 
 ## Verification
 
@@ -105,7 +107,10 @@ Badges can be automatically regenerated and published in CI workflows:
 - name: Publish to GitHub Pages
   run: |
     mkdir -p _site/badges
-    cp finance/badges/*.json _site/badges/ 2>/dev/null || true
+    # Copy badge artifacts if they exist
+    if ls finance/badges/*.json 1> /dev/null 2>&1; then
+      cp finance/badges/*.json _site/badges/
+    fi
     # Deploy _site/ via GitHub Pages action
 ```
 
