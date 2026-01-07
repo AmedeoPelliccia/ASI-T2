@@ -52,6 +52,7 @@ domains/*/tests/sandbox_*/
 finance/ledger.json
 finance/txlog.jsonl
 finance/txhead.json
+finance/badges/
 badges/
 
 # ------------------------------
