@@ -6,7 +6,7 @@ This directory contains **generated badge artifacts** for the Teknia Token (TT) 
 
 This directory currently contains:
 
-* **`tt-balance.json`** — Shields.io endpoint JSON with current treasury balance (configured path)
+* **`tt-balance.json`** — Shields.io endpoint JSON with treasury balance (path configured in `teknia.tokenomics.json`)
 
 The `badge` command can generate:
 
@@ -71,11 +71,13 @@ The JSON endpoint follows the [Shields.io endpoint schema](https://shields.io/en
 ```json
 {
   "schemaVersion": 1,
-  "label": "Teknia TT",
-  "message": "10,000.000 TT",
+  "label": "TeknIA TT",
+  "message": "10000.000 TT",
   "color": "blue"
 }
 ```
+
+**Example** from current repository (actual content of `tt-balance.json`).
 
 Use in documentation:
 
@@ -89,10 +91,10 @@ Replace `YOUR-USERNAME/YOUR-REPO` with your actual GitHub repository path (e.g.,
 
 Badge values are derived from verified ledger data:
 
-1. **Ledger loaded** — Current account balances read from `finance/ledger.json`
+1. **Ledger loaded** — Current account balances read from `finance/ledger.json` (generated file)
 2. **Treasury queried** — Balance of `TREASURY` account (or configured treasury)
 3. **Conversion applied** — Balance in `deg` converted to `TT` using configured `deg_per_tt` ratio
-4. **Output formatted** — Thousands separators added for readability
+4. **Output formatted** — Badge message includes balance with decimal precision
 
 The `badge` command does **not** mutate the ledger—it only reads current state.
 
