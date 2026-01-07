@@ -29,8 +29,8 @@ canonical_hash: pending
 > **Principle:** If it didn’t run in **CI**, it doesn’t count as **evidence**.
 
 - **Public framework:** [**IDEALE Evidence Framework (IEF)**](#ideale-evidence-framework-ief)  
-- **Primary sector profile:** [**TFA · Aerospace**](#tfa--aerospace-domain-profile)  
-- **Reference implementation:** [**ASI‑T2**](#asi-t2-reference-implementation)
+- **Primary sector profile:** [**TFA · Aerospace**](#tfa-aerospace-domain-profile)  
+- **Reference implementation:** [**ASI‑T2**](#asit2-reference-implementation)
 
 ---
 
@@ -41,12 +41,12 @@ canonical_hash: pending
 - [IDEALE Evidence Framework (IEF)](#ideale-evidence-framework-ief)
 - [Visual Overview](#visual-overview)
 - [Sector Profiles](#sector-profiles)
-- [ASI‑T2 · Reference Implementation](#asi-t2-reference-implementation)
-- [Programs by Pillar · IDEALE](#programs-by-pillar--ideale)
+- [ASI‑T2 · Reference Implementation](#asit2-reference-implementation)
+- [Programs by Pillar · IDEALE](#programs-by-pillar-ideale)
 - [Evidence Objects](#evidence-objects)
 - [Conformance Ladder](#conformance-ladder)
 - [Roadmap Phases](#roadmap-phases)
-- [Contact & Pilots](#contact--pilots)
+- [Contact & Pilots](#contact-pilots)
 - [Link Map](#link-map-for-clustered-keywords)
 
 ---
@@ -289,14 +289,14 @@ Interested in a 2‑week pilot (Aerospace · Energy · Defense · Logistics)?
 * **IEF · IDEALE Evidence Framework** → #ideale-evidence-framework-ief
 * **Visual Overview** → #visual-overview
 * **Sector Profiles** → #sector-profiles
-* **TFA · Aerospace Domain Profile** → #tfa--aerospace-domain-profile
-* **ASI‑T2 · Reference Implementation** → #asi-t2-reference-implementation
-* **Programs by Pillar** → #programs-by-pillar--ideale
+* **TFA · Aerospace Domain Profile** → #tfa-aerospace-domain-profile
+* **ASI‑T2 · Reference Implementation** → #asit2-reference-implementation
+* **Programs by Pillar** → #programs-by-pillar-ideale
 
-  * **AMPEL360** → #programs-by-pillar--ideale
-  * **GAIA** → #programs-by-pillar--ideale
-  * **QAIM‑2** → #programs-by-pillar--ideale
-  * **HYDROBOTS** → #programs-by-pillar--ideale
+  * **AMPEL360** → #programs-by-pillar-ideale
+  * **GAIA** → #programs-by-pillar-ideale
+  * **QAIM‑2** → #programs-by-pillar-ideale
+  * **HYDROBOTS** → #programs-by-pillar-ideale
 * **Evidence Objects** → #evidence-objects
 
   * **UTCS · manifest skeleton** → #utcs-manifest-skeleton-yaml
@@ -305,7 +305,7 @@ Interested in a 2‑week pilot (Aerospace · Energy · Defense · Logistics)?
   * **Verify · Badge** → #evidence-objects
 * **Conformance Ladder** → #conformance-ladder
 * **Roadmap** → #roadmap-phases
-* **Contact & Pilots** → #contact--pilots
+* **Contact & Pilots** → #contact-pilots
 * **SPDX** → [https://spdx.dev](https://spdx.dev)
 
 ```
