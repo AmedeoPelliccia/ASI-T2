@@ -1,9 +1,6 @@
-Here’s a ready-to-commit **`ASI-T2/.github/copilot-instructions.md`** you can drop into `main`.
-
-````markdown
 # Copilot Instructions for ASI-T2
 
-> Purpose: Make Copilot’s suggestions, reviews, and codegen **consistent with this repo’s rules**, especially the Teknia Token (TT) system **v3.14** (π-tier hybrid tokenomics) and our CI/legal/compliance expectations.
+> Purpose: Make Copilot's suggestions, reviews, and codegen **consistent with this repo's rules**, especially the Teknia Token (TT) system **v3.14** (π-tier hybrid tokenomics) and our CI/legal/compliance expectations.
 
 ---
 
@@ -36,12 +33,13 @@ Here’s a ready-to-commit **`ASI-T2/.github/copilot-instructions.md`** you can 
    - Reward/Consume: **always 0.5%** (50 bps), no tiering.
 4. **No silent policy drift**: Never change policy semantics in code without updating config/docs/tests and verifying.
 5. **Hash-chain integrity**: Any mutation to tx append code must keep `prev → hash(payload)` chain logic and `TXHEAD` sync.
-6. **I/O determinism**: Use UTF-8, `newline="\n"`, stable JSON canon (`sort_keys=True`, compact separators) for reproducibility.
+6. **I/O determinism**: Use UTF-8, `newline="
+"`, stable JSON canon (`sort_keys=True`, compact separators) for reproducibility.
 7. **Security hygiene**:
    - Escape text in **SVG** (`html.escape`, `quote=False`) before injecting into text nodes.
    - Treat all dynamic strings as untrusted; avoid templating into HTML/SVG attributes unescaped.
 8. **Tests over examples**: Prefer adding/expanding tests in `tools/test_tek_tokens_v314.py` to lock behavior.
-9. **Don’t invent files**: Respect `.gitignore` and generated artifacts; do not suggest committing runtime state.
+9. **Don't invent files**: Respect `.gitignore` and generated artifacts; do not suggest committing runtime state.
 10. **Clarity over cleverness**: Small, auditable diffs; explicit arithmetic; no magic constants—reference Δθmin and tier thresholds symbolically from config when possible.
 
 ---
@@ -79,7 +77,8 @@ Here’s a ready-to-commit **`ASI-T2/.github/copilot-instructions.md`** you can 
 
 ### Badge / Output Artifacts
 - [ ] Escaped strings in SVG/JSON (`html.escape` for SVG text)
-- [ ] File written with `encoding='utf-8', newline='\n'`
+- [ ] File written with `encoding='utf-8', newline='
+'`
 - [ ] No sensitive or user-controlled attributes added
 
 ### Tests
@@ -95,7 +94,7 @@ Here’s a ready-to-commit **`ASI-T2/.github/copilot-instructions.md`** you can 
 **Canonical JSON write**
 ```python
 json.dump(obj, f, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-````
+```
 
 **SVG text escaping**
 
@@ -126,7 +125,6 @@ entry["hash"] = sha256(prev_hash + canon(entry_without_hash))
 
 * **Commit messages:** `tools: enforce SVG escaping in badge`, `finance: add π-tier thresholds to config`, `tests: add v3.14 tier coverage`
 * **PR description should include:**
-
   * What changed and why (link to v3.14 rule if relevant)
   * Effects on fees/Δθmin scope/replay/verify
   * Test coverage summary
@@ -150,7 +148,4 @@ Prefer:
 2. Add/adjust tests to pin intended behavior.
 3. Keep changes small and auditable.
 
-*Thank you! This guidance helps align Copilot’s suggestions with our transparency, legality, sustainability, meritocracy, accessibility, equity, and fairness principles.*
-
-```
-```
+*Thank you! This guidance helps align Copilot's suggestions with our transparency, legality, sustainability, meritocracy, accessibility, equity, and fairness principles.*
