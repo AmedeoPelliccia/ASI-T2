@@ -8,6 +8,8 @@ This repository publishes a static site with:
 
 > **Enable Pages** → *Settings* → *Pages* → **Source: GitHub Actions**. On push to `main`/`master`, the site builds and deploys automatically.
 
+> **⚠️ Important:** This repository uses **GitHub Pages** for deployment, NOT Vercel. The `vercel.json` file explicitly disables Vercel deployments. If you see Vercel bot notifications, they should be ignored or the Vercel integration should be removed from the repository settings.
+
 ---
 
 ## Teknia Token (TT) System v3.14
@@ -21,6 +23,9 @@ This repository includes the **Teknia Token (TT)** system v3.14, a novel token i
   - `teknia.tokenomics.nofee.json` — No-fee variant for testing/internal use
   - `ledger.json` — Token ledger with policy hash verification (generated, not in git)
   - `txlog.jsonl` / `txhead.json` — Transaction hash chain (generated, not in git)
+  - **[badges/](./finance/badges/README.md)** — Generated badge artifacts (SVG and JSON)
+    - `tt-balance.json` — Shields.io endpoint for treasury balance (generated, not in git)
+    - `tt-verified.svg` — Verification badge SVG (generated, not in git)
 * **[tools/](./tools/README.md)** — CLI tool for token management v3.14
   - `tek_tokens.py` — Full-featured CLI: init, transfer, reward, consume, quote, verify, badge
   - `test_tek_tokens_v314.py` — Comprehensive test suite (35 tests)
@@ -50,6 +55,7 @@ This repository includes the **Teknia Token (TT)** system v3.14, a novel token i
 * **EUR Valuation:** Optional `--eur-per-tt` or `--eur-per-kwh` display
 * **Transaction Hash Chain:** Cryptographic integrity via `txlog.jsonl` + `txhead.json`
 * **Dual Configs:** Hybrid (fees) and no-fee variants
+* **Badge Generation:** SVG and Shields.io JSON badges for treasury balance and verification status
 
 ### Quick Start v3.14
 

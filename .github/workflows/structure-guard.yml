@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Validate README links
+        run: python3 scripts/validate_readme_links.py README.md
+      
       - name: Run structure checks
         run: |
           python3 - <<'EOF'
