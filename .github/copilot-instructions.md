@@ -33,8 +33,7 @@
    - Reward/Consume: **always 0.5%** (50 bps), no tiering.
 4. **No silent policy drift**: Never change policy semantics in code without updating config/docs/tests and verifying.
 5. **Hash-chain integrity**: Any mutation to tx append code must keep `prev → hash(payload)` chain logic and `TXHEAD` sync.
-6. **I/O determinism**: Use UTF-8, `newline="
-"`, stable JSON canon (`sort_keys=True`, compact separators) for reproducibility.
+6. **I/O determinism**: Use UTF-8, `newline="\n"`, stable JSON canon (`sort_keys=True`, compact separators) for reproducibility.
 7. **Security hygiene**:
    - Escape text in **SVG** (`html.escape`, `quote=False`) before injecting into text nodes.
    - Treat all dynamic strings as untrusted; avoid templating into HTML/SVG attributes unescaped.
@@ -77,8 +76,7 @@
 
 ### Badge / Output Artifacts
 - [ ] Escaped strings in SVG/JSON (`html.escape` for SVG text)
-- [ ] File written with `encoding='utf-8', newline='
-'`
+- [ ] File written with `encoding='utf-8', newline='\n'`
 - [ ] No sensitive or user-controlled attributes added
 
 ### Tests
