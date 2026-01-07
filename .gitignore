@@ -52,7 +52,12 @@ domains/*/tests/sandbox_*/
 finance/ledger.json
 finance/txlog.jsonl
 finance/txhead.json
-badges/
+# Ignore generated badge artifacts but not READMEs
+badges/*.svg
+badges/*.json
+finance/badges/*.svg
+finance/badges/*.json
+!finance/badges/README.md
 
 # ------------------------------
 # End of canonical ignore list
