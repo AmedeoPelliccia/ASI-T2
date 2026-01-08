@@ -1,5 +1,5 @@
 ---
-classification: INTERNAL–EVIDENCE-REQUIRED
+classification: INTERNAL-EVIDENCE-REQUIRED
 maintainer: "ASI-T Architecture Team"
 ---
 
