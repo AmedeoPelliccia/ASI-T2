@@ -1,0 +1,30 @@
+# CSDB Profile Configuration
+# ATA Section: 21-20
+# Publication: AMM
+
+profile:
+  name: "BWQ1-21-20-AMM"
+  version: "1.0.0"
+  standard: "S1000D Issue 6.0"
+  
+model:
+  identification_code: "BWQ1"
+  system_difference_code: "A"
+  system_code: "21"
+  
+publication:
+  type: "AMM"
+  language: "EN"
+  country: "US"
+  security_classification: "01"
+  
+applicability:
+  model: "BWB-Q100"
+  variants: []
+  
+brex:
+  reference: "DMC-BWQ1-A-00-00-00-00-00A-022A-B-EN-US"
+  
+output:
+  format: ["PDF", "HTML5", "IETP"]
+  export_directory: "EXPORT"

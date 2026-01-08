@@ -1,0 +1,12 @@
+# Publication Bindings for ATA 21-60 - IPC
+# Format: DM_CODE,PUBLICATION_MODULE,POSITION,APPLICABILITY
+# This file defines the mapping between data modules and publication structure
+#
+# Columns:
+# - DM_CODE: Data Module Code reference
+# - PUBLICATION_MODULE: Target publication module
+# - POSITION: Position within the publication
+# - APPLICABILITY: Applicability conditions
+#
+# Example:
+# DMC-BWQ1-A-21-60-00-00-00A-040A-D-EN-US,PM-BWQ1-21-60-IPC,1.0,ALL
