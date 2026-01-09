@@ -1,0 +1,61 @@
+name: Supplier/Vendor Domains Structure
+on:
+  push:
+  pull_request:
+
+jobs:
+  check-structure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build expected list from canonical domains
+        id: build
+        run: |
+          python - << 'PY'
+          import json, sys
+          from pathlib import Path
+          
+          # Canonical domain codes (must match tools/sync_domains_suppliers_vendors.py)
+          CANONICAL_DOMAINS = [
+              "AAA", "AAP", "CCC", "CQH", "DDD", "EDI", "EEE", "EER",
+              "IIF", "IIS", "LCC", "LIB", "MEC", "OOO", "PPP"
+          ]
+          
+          need = sorted(CANONICAL_DOMAINS)
+          print("CODES=" + json.dumps(need))
+          with open("codes.json", "w") as f:
+              f.write(json.dumps(need))
+          PY
+
+      - name: Check Supplier/Services and Vendors/Components coverage
+        run: |
+          python - << 'PY'
+          import json, sys
+          from pathlib import Path
+          
+          need = json.loads(Path("codes.json").read_text())
+          tops = ["DELs","PAx","PLM","QUANTUM_OA","policy","tests"]
+          plm_sub = ["CAO","CAD","CAE","CAM","CAV","CAI","CAS","CAP","CMP"]
+          qoa_sub = ["QOX","MILP","LP","QP","QUBO","QAOA","SA","GA"]
+          
+          errors = []
+          
+          def must_exist(path):
+              if not Path(path).is_dir():
+                  errors.append(f"missing dir: {path}")
+          
+          for base in ["Supplier/Services/domains", "Vendors/Components/domains"]:
+              for code in need:
+                  for t in tops:
+                      must_exist(f"{base}/{code}/{t}")
+                  for s in plm_sub:
+                      must_exist(f"{base}/{code}/PLM/{s}")
+                  for s in qoa_sub:
+                      must_exist(f"{base}/{code}/QUANTUM_OA/{s}")
+          
+          if errors:
+              print("\n".join(errors))
+              sys.exit(1)
+          print("OK: supplier/vendor domain scaffolding present.")
+          PY
