@@ -57,6 +57,10 @@ finance/badges/*.svg
 finance/badges/*.json
 !finance/badges/README.md
 
+# IEF HUELLΔ generated artifacts
+evidence/passports/
+verification/
+
 # ------------------------------
 # End of canonical ignore list
 # ------------------------------

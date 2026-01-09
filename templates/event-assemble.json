@@ -1,0 +1,24 @@
+{
+  "ief_version": "0.1",
+  "event_type": "assemble",
+  "ts": "2025-10-05T15:30:00Z",
+  "actor": { "id": "", "role": "technician", "auth": "" },
+  "asset": {
+    "uid": "urn:ideale:component:AAA:BWQ1:FWD-SPAR:SN-000123",
+    "passport_ref": "evidence/passports/AAA/SN-000123.json"
+  },
+  "context": { "loc_geohash": "ezjnp", "env": "HANGAR", "temp_c": 21.4, "vibe": "low" },
+  "inputs": [
+    {"path": "photos/AAA/SN-000123/2025-10-05-1530.jpg", "sha256": "<sha256>"}
+  ],
+  "signatures": {
+    "sigstore_bundle": "signatures/AAA/SN-000123/evt-assemble.bundle.json",
+    "policy_hash": "sha256:<pinned>"
+  },
+  "calc": {
+    "energy_kwh_est": 0.010,
+    "co2e_kg_est": 0.002,
+    "quality_score": 0.97,
+    "risk_score": 0.07
+  }
+}

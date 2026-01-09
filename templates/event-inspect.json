@@ -1,0 +1,26 @@
+{
+  "ief_version": "0.1",
+  "event_type": "inspect",
+  "ts": "2025-10-05T12:00:00Z",
+  "actor": { "id": "", "role": "inspector", "auth": "" },
+  "asset": {
+    "uid": "urn:ideale:component:AAA:BWQ1:FWD-SPAR:SN-000123",
+    "passport_ref": "evidence/passports/AAA/SN-000123.json"
+  },
+  "context": { "loc_geohash": "ezjnn", "env": "HANGAR", "temp_c": 21.0, "vibe": "low" },
+  "inputs": [
+    {"path": "photos/AAA/SN-000123/2025-10-05-1200.jpg", "sha256": "<sha256>"}
+  ],
+  "signatures": {
+    "sigstore_bundle": "signatures/AAA/SN-000123/evt-inspect.bundle.json",
+    "policy_hash": "sha256:<pinned>"
+  },
+  "calc": {
+    "energy_kwh_est": 0.002,
+    "co2e_kg_est": 0.001,
+    "quality_score": 0.99,
+    "risk_score": 0.05,
+    "conformance": ["IEF-0.1","TFA-ATA-57"],
+    "reputation_weight": 0.92
+  }
+}
