@@ -251,6 +251,43 @@ classification: INTERNAL–EVIDENCE-REQUIRED
 
 ---
 
+## ATA 22 — Auto Flight System
+
+For the **AMPEL360 BWB-Q100** hydrogen-hybrid aircraft, **ATA 22 (Auto Flight)** covers flight guidance and automatic flight functions, aligned with the **ATA iSpec 2200 / ATA Standard Numbering System** published by Airlines for America (A4A).
+
+### ATA 22 Breakdown
+
+* **22-00 — Auto Flight, General** — Architecture, modes philosophy, redundancy concept, integration boundaries
+* **22-10 — Autopilot** — Automatic control laws, engagement/disengagement logic, fail-operational behavior
+* **22-20 — Speed–Attitude Correction** — Speed/attitude capture and correction functions
+* **22-30 — Auto Throttle** — Autothrottle/autothrust computation and mode logic for H₂-electric propulsion
+* **22-40 — System Monitor** — Monitoring, built-in tests, fault detection/isolation, mode inhibition
+* **22-50 — Aerodynamic Load Alleviating** — Gust/load alleviation functions for structural load reduction
+
+### BWB-Q100 Context
+
+The BWB (Blended-Wing Body) configuration with H₂ fuel cell / electric propulsion introduces specific considerations:
+
+* **Distributed control effectors** (elevons/spoilers/drag devices) coordination
+* **Fuel cell dynamics** integration with auto-throttle commands
+* **Energy state management** with electric propulsion responsiveness
+* **Large lifting surfaces** requiring enhanced load alleviation
+* **Power quality** assumptions (ride-through, brownout behavior)
+
+### Boundary Clarification
+
+**ATA 22 does NOT include:**
+* Primary flight controls (→ **ATA 27**)
+* Navigation sensors (→ **ATA 34**)
+* Communications (→ **ATA 23**)
+* Electrical power generation (→ **ATA 24**)
+* Cockpit displays (→ **ATA 31**)
+* IMA computing platform (→ **ATA 42**)
+
+**Documentation location:** `PRODUCTS/AMPEL360/AMPEL360_AIR_TRANSPORT/BWB-Q100/domains/IIS/ata/22/README.md`
+
+---
+
 ## Conformance Ladder
 
 | Level | Name           | Requirements (summary)                                                    |

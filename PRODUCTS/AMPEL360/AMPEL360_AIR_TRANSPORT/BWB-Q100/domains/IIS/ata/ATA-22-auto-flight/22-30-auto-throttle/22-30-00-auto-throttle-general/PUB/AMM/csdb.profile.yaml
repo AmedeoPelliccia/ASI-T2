@@ -1,0 +1,22 @@
+---
+csdb_profile:
+  model_ident_code: "BWB1"
+  system_diff_code: "A"
+  system_code: "22"
+  subsystem_code: "00"
+  assembly_code: "00"
+  disassembly_code: "00"
+  info_code: "000"
+  info_code_variant: "A"
+  item_location_code: "D"
+  language: "EN-US"
+  issue_number: "001"
+  in_work: "A"
+
+brex:
+  schema_version: "5.0"
+  rules: "DMC-BWB1-A-00-00-00-00A-022A-D-EN-US.xml"
+
+export:
+  format: "PDF"
+  output_path: "EXPORT/"
