@@ -24,7 +24,7 @@ from typing import List, Set
 # S1000D DM filename pattern (Issue 5.0/6.0)
 # DMC-<MIC>-<SDC>-<SC>-<SSC>-<SSSC>-<AC><DAC>-<IC><ICV>-<ILC>-<LANG>-<COUNTRY>.xml
 DM = re.compile(
-    r'^DMC-[A-Z0-9]{3,4}-[A-Z]-\d{2}-\d{2}-\d{2}-\d{2}[A-Z]-\d{3}-[A-Z]-[A-Z]-[A-Z]{2}-[A-Z]{2}\.xml$'
+    r'^DMC-[A-Z0-9]{3,4}-[A-Z]-\d{2}-\d{2}-\d{2}-\d{2}[A-Z]-\d{3}[A-Z0-9]-[A-Z]-[A-Z]{2}-[A-Z]{2}\.xml$'
 )
 
 # CAx filename pattern (CAD/CAE/CAM/CAV/CMP)
