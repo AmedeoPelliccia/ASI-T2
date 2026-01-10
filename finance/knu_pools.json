@@ -1,0 +1,76 @@
+{
+  "version": "1.0",
+  "description": "KNOT pool configuration for KNU (Knowledge Unit) reward distribution",
+  
+  "parameters": {
+    "alpha": 0.30,
+    "lambda_spillover": 0.50,
+    "description": "Default distribution weights: 30% effort, 70% impact; spillover worth 50% of direct impact"
+  },
+  
+  "eligibility": {
+    "required_status": ["accepted", "merged"],
+    "require_artifacts": true,
+    "require_validation": true,
+    "description": "KNU must be accepted/merged with evidence artifacts and KNOT owner validation"
+  },
+  
+  "pools": {
+    "K01": {
+      "pool_tt": 100,
+      "description": "Certification authority basis"
+    },
+    "K02": {
+      "pool_tt": 100,
+      "description": "ConOps command authority readiness"
+    },
+    "K03": {
+      "pool_tt": 120,
+      "description": "Hazard management cryogenic/fire"
+    },
+    "K04": {
+      "pool_tt": 100,
+      "description": "Interfaces geometry ICDs datums"
+    },
+    "K05": {
+      "pool_tt": 150,
+      "description": "Model fidelity uncertainty budgets"
+    },
+    "K06": {
+      "pool_tt": 150,
+      "description": "Data governance SSOT schemas"
+    },
+    "K07": {
+      "pool_tt": 200,
+      "description": "AI autonomy assurance monitoring"
+    },
+    "K08": {
+      "pool_tt": 100,
+      "description": "Cybersecurity threat mitigation"
+    },
+    "K09": {
+      "pool_tt": 100,
+      "description": "Test verification qualification"
+    },
+    "K10": {
+      "pool_tt": 100,
+      "description": "Industrial readiness supply chain"
+    },
+    "K11": {
+      "pool_tt": 100,
+      "description": "Human factors training readiness"
+    },
+    "K12": {
+      "pool_tt": 120,
+      "description": "Spaceport ground infrastructure"
+    },
+    "K13": {
+      "pool_tt": 150,
+      "description": "MRO PHM health monitoring"
+    },
+    "K14": {
+      "pool_tt": 100,
+      "description": "Regulatory evolution compliance"
+    }
+  }
+}
