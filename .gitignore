@@ -57,6 +57,9 @@ finance/badges/*.svg
 finance/badges/*.json
 !finance/badges/README.md
 
+# KNU distribution example reports (generated)
+tools/examples/*_report.json
+
 # ------------------------------
 # End of canonical ignore list
 # ------------------------------
