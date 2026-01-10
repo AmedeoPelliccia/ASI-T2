@@ -268,6 +268,272 @@ Embed in README:
 
 ---
 
+## KNU (Knowledge Unit) Reward Distribution
+
+**KNU Distribution System** extends TT v3.14 to allocate rewards based on effort and impact metrics within Knowledge Network Operational Tasks (KNOTs).
+
+### Distribution Formula
+
+Token allocation uses a weighted combination of normalized effort and impact:
+
+```
+w_i = α·Ê_i + (1-α)·Î_i
+T_i = P_k · w_i
+```
+
+**Components:**
+
+- **P_k** — Prize pool in TT for the KNOT (e.g., 150 TT for K06)
+- **E_i** — Predicted effort for KNU i (story points or hours)
+- **Ê_i** — Normalized effort: `E_i / Σ E_i` across all KNUs
+- **I_i** — Effective impact: `ΔR_k,i + λ·S_i`
+- **Î_i** — Normalized impact: `I_i / Σ I_i` across all KNUs
+- **ΔR_k,i** — Direct residue reduction (uncertainty resolved, 0-100)
+- **S_i** — Spillover impact from adjacent KNOTs: `Σ(a_k→j · ΔR_j,i)`
+- **a_k→j** — Adjacency weight between KNOT k and j (0-1)
+- **w_i** — Final weight for KNU i (weights sum to 1.0)
+- **T_i** — Token allocation for KNU i
+
+**Default Parameters:**
+
+- **α = 0.30** → 30% effort weight, 70% impact weight
+- **λ = 0.50** → spillover worth 50% of direct impact
+
+### Example Calculation
+
+Given KNOT K06 with pool = 150 TT and 3 KNUs:
+
+| KNU | Owner | E_pred | ΔR_primary | ΔR_adj | Status |
+|-----|-------|--------|------------|--------|--------|
+| KNU-K06-00-001 | alice | 5.0 | 30.0 | 10.0 | merged |
+| KNU-K06-00-002 | bob | 3.0 | 15.0 | 5.0 | merged |
+| KNU-K06-00-003 | charlie | 2.0 | 5.0 | 0.0 | merged |
+
+**Step 1: Normalize effort**
+
+- Total effort: 5 + 3 + 2 = 10
+- Ê_alice = 5/10 = 0.50
+- Ê_bob = 3/10 = 0.30
+- Ê_charlie = 2/10 = 0.20
+
+**Step 2: Calculate effective impact (λ = 0.50)**
+
+- I_alice = 30 + 0.50×10 = 35
+- I_bob = 15 + 0.50×5 = 17.5
+- I_charlie = 5 + 0.50×0 = 5
+
+**Step 3: Normalize impact**
+
+- Total impact: 35 + 17.5 + 5 = 57.5
+- Î_alice = 35/57.5 = 0.609
+- Î_bob = 17.5/57.5 = 0.304
+- Î_charlie = 5/57.5 = 0.087
+
+**Step 4: Calculate weights (α = 0.30)**
+
+- w_alice = 0.30×0.50 + 0.70×0.609 = 0.576
+- w_bob = 0.30×0.30 + 0.70×0.304 = 0.303
+- w_charlie = 0.30×0.20 + 0.70×0.087 = 0.121
+
+**Step 5: Allocate tokens**
+
+- T_alice = 150 × 0.576 = 86.4 TT (31,104 deg)
+- T_bob = 150 × 0.303 = 45.5 TT (16,380 deg)
+- T_charlie = 150 × 0.121 = 18.1 TT (6,516 deg)
+
+### Spillover Mechanism
+
+Spillover captures cross-KNOT impact via adjacency weights. For example, if:
+
+- KNOT K06 is adjacent to K01, K04, K05, K07
+- A KNU in K06 resolves uncertainty that benefits K01 (adjacency weight = 0.4)
+- The spillover contribution is: `S_i += 0.4 × ΔR_K01,i`
+
+**Adjacency graph** (excerpt):
+
+```json
+{
+  "K06": {
+    "K01": 0.4,
+    "K04": 0.3,
+    "K05": 0.3,
+    "K07": 0.4
+  }
+}
+```
+
+Spillover rewards work that benefits multiple KNOTs, promoting cross-functional collaboration.
+
+### Eligibility Rules
+
+For a KNU to be eligible for distribution:
+
+1. **Status**: Must be `accepted` or `merged` (not `pending` or `rejected`)
+2. **Artifacts**: Must include evidence links (documents, PRs, commits)
+3. **Validation**: Must be validated by KNOT owner with timestamp
+
+**Validation fields:**
+
+```json
+{
+  "validated_by": "knot_owner_username",
+  "validated_at": "2026-01-10T00:00:00Z"
+}
+```
+
+### CLI Usage
+
+#### Distribute Rewards
+
+```bash
+# Full distribution with TT rewards
+python tools/knu_distribution.py distribute --knot K06 --input knus.json
+
+# Dry-run (calculate without executing)
+python tools/knu_distribution.py distribute --knot K06 --input knus.json --dry-run
+```
+
+#### Calculate Weights
+
+```bash
+# Preview weight calculation
+python tools/knu_distribution.py calculate --knot K06 --input knus.json
+```
+
+**Output:**
+
+```
+============================================================
+Weight Calculation: K06
+Pool: 150.0 TT
+α (effort weight): 0.3
+λ (spillover factor): 0.5
+============================================================
+
+KNU-K06-00-001       alice           w=0.5761 →    86.41 TT
+KNU-K06-00-002       bob             w=0.3030 →    45.46 TT
+KNU-K06-00-003       charlie         w=0.1209 →    18.13 TT
+
+============================================================
+Total weight: 1.000000 (should be 1.0)
+============================================================
+```
+
+#### Validate Eligibility
+
+```bash
+# Check KNU eligibility
+python tools/knu_distribution.py validate --input knus.json
+```
+
+#### Generate Report
+
+```bash
+# JSON report
+python tools/knu_distribution.py report --knot K06 --input knus.json --output report.json
+```
+
+### KNU Input Format
+
+KNU entries are provided in JSON format:
+
+```json
+{
+  "knus": [
+    {
+      "knu_id": "KNU-K06-00-001",
+      "knot_id": "K06",
+      "owner": "alice",
+      "E_pred": 5.0,
+      "dR_primary": 30.0,
+      "dR_adj_sum": 10.0,
+      "status": "merged",
+      "artifacts": ["evidence/k06-001.md", "https://github.com/.../pull/123"],
+      "validated_by": "knot_owner",
+      "validated_at": "2026-01-10T00:00:00Z"
+    }
+  ]
+}
+```
+
+**Field descriptions:**
+
+- `knu_id` — Unique identifier (format: `KNU-<KNOT>-<SEQ>-<ID>`)
+- `knot_id` — Parent KNOT (K01-K14)
+- `owner` — GitHub username or account to receive tokens
+- `E_pred` — Predicted effort (story points, hours, or normalized units)
+- `dR_primary` — Direct residue reduction (0-100, uncertainty resolved)
+- `dR_adj_sum` — Pre-calculated spillover from adjacent KNOTs
+- `status` — Lifecycle status (`pending`, `accepted`, `merged`, `rejected`)
+- `artifacts` — Evidence links (documents, PRs, commits, issues)
+- `validated_by` — KNOT owner username who validated
+- `validated_at` — Validation timestamp (ISO 8601)
+
+### KNOT Pool Allocations
+
+Current pool allocations (total: 1,590 TT):
+
+| KNOT | Pool (TT) | Description |
+|------|-----------|-------------|
+| K01  | 100       | Certification authority basis |
+| K02  | 100       | ConOps command authority readiness |
+| K03  | 120       | Hazard management cryogenic/fire |
+| K04  | 100       | Interfaces geometry ICDs datums |
+| K05  | 150       | Model fidelity uncertainty budgets |
+| K06  | 150       | Data governance SSOT schemas |
+| K07  | 200       | AI autonomy assurance monitoring |
+| K08  | 100       | Cybersecurity threat mitigation |
+| K09  | 100       | Test verification qualification |
+| K10  | 100       | Industrial readiness supply chain |
+| K11  | 100       | Human factors training readiness |
+| K12  | 120       | Spaceport ground infrastructure |
+| K13  | 150       | MRO PHM health monitoring |
+| K14  | 100       | Regulatory evolution compliance |
+
+**Total allocated:** 1,590 TT across 14 KNOTs
+
+### Integration with TT System
+
+KNU distribution integrates with TT v3.14 reward mechanism:
+
+1. **Calculate weights** using effort + impact formula
+2. **Convert to deg** (1 TT = 360 deg) for integer arithmetic
+3. **Execute rewards** via `tek_tokens.py reward --to <owner> --tt <amount>`
+4. **Apply 0.5% fee** (base rate, not π-tier) on each reward
+5. **Log transaction** to `finance/txlog.jsonl` with hash chain
+6. **Record distribution** to `finance/knu_ledger.csv`
+
+**Transaction flow:**
+
+```
+KNU Input → Validate → Calculate Weights → Execute Rewards → Update Ledgers
+    ↓           ↓             ↓                   ↓                ↓
+knus.json   eligibility   w_i = α·Ê + (1-α)·Î   tek_tokens.py   txlog.jsonl
+                                                                 knu_ledger.csv
+```
+
+### Distribution Ledger
+
+All KNU distributions are logged to `finance/knu_ledger.csv`:
+
+```csv
+timestamp,knot_id,knu_id,owner,E_pred,dR_primary,dR_adj_sum,weight,tokens_tt,tokens_deg,tx_id,validated_by
+2026-01-10T12:00:00Z,K06,KNU-K06-00-001,alice,5.0,30.0,10.0,0.5761,86.41,31108,TX-000123,knot_owner
+2026-01-10T12:00:01Z,K06,KNU-K06-00-002,bob,3.0,15.0,5.0,0.3030,45.46,16364,TX-000124,knot_owner
+```
+
+This provides an auditable record of all distributions with full traceability to TT transactions.
+
+### Configuration Files
+
+- **Pool config**: `finance/knu_pools.json` — KNOT pools, α, λ parameters
+- **Adjacency graph**: `finance/knu_adjacency.json` — Cross-KNOT weights
+- **Distribution ledger**: `finance/knu_ledger.csv` — Distribution records
+
+All configurations are committed to git for transparency and versioning.
+
+---
+
 ## Roadmap
 
 1. **Label-driven rewards** (`tt:reward-<n>` on PRs)
@@ -275,6 +541,7 @@ Embed in README:
 3. **Domain budgets** with scheduled top-ups
 4. **Folder-based attribution** of costs/rewards
 5. **Quoting in EUR** via energy/price models
+6. **Automated KNU distribution** via GitHub Actions on milestone completion
 
 ---
 
@@ -282,7 +549,10 @@ Embed in README:
 
 * Tokenomics config — `finance/teknia.tokenomics.json`
 * Optional no-fee config — `finance/teknia.tokenomics.nofee.json`
-* CLI — `tools/tek_tokens.py`
+* KNU pools config — `finance/knu_pools.json`
+* KNU adjacency graph — `finance/knu_adjacency.json`
+* TT CLI — `tools/tek_tokens.py`
+* KNU distribution CLI — `tools/knu_distribution.py`
 * Repo README — `README.md`
 
 ```
