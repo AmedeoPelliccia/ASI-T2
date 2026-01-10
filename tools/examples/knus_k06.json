@@ -1,0 +1,47 @@
+{
+  "knus": [
+    {
+      "knu_id": "KNU-K06-00-001",
+      "knot_id": "K06",
+      "owner": "alice",
+      "E_pred": 5.0,
+      "dR_primary": 30.0,
+      "dR_adj_sum": 10.0,
+      "status": "merged",
+      "artifacts": [
+        "docs/data-governance/schema-v2.md",
+        "https://github.com/org/repo/pull/123"
+      ],
+      "validated_by": "knot_owner",
+      "validated_at": "2026-01-10T12:00:00Z"
+    },
+    {
+      "knu_id": "KNU-K06-00-002",
+      "knot_id": "K06",
+      "owner": "bob",
+      "E_pred": 3.0,
+      "dR_primary": 15.0,
+      "dR_adj_sum": 5.0,
+      "status": "merged",
+      "artifacts": [
+        "docs/data-governance/ssot-implementation.md"
+      ],
+      "validated_by": "knot_owner",
+      "validated_at": "2026-01-10T12:30:00Z"
+    },
+    {
+      "knu_id": "KNU-K06-00-003",
+      "knot_id": "K06",
+      "owner": "charlie",
+      "E_pred": 2.0,
+      "dR_primary": 5.0,
+      "dR_adj_sum": 0.0,
+      "status": "merged",
+      "artifacts": [
+        "docs/data-governance/glossary.md"
+      ],
+      "validated_by": "knot_owner",
+      "validated_at": "2026-01-10T13:00:00Z"
+    }
+  ]
+}
