@@ -7,12 +7,15 @@ This directory contains the IETP static site generator for ATA-57 Wings (BWB-Hâ‚
 The IETP system generates a modern, interactive web interface for browsing S1000D data modules organized by:
 - **Subsystems**: 57-10 through 57-50 (Wing Structure, Fuel Interfaces, Control Surfaces, High-Lift, Equipment Integration)
 - **Information Code Categories**: Description, Tests, Procedures, Fault Isolation, IPD/Parts
+- **Multimedia Content**: Embedded video, audio, images, and interactive diagrams
 
 ## Files
 
 - `build_ietp.py` - Static site generator (Python 3.9+, stdlib only)
 - `assets/css/ietp.css` - Dark theme styling
+- `assets/css/media-embed.css` - Multimedia component styling
 - `assets/js/ietp.js` - Client-side filtering and search
+- `assets/js/media-embed.js` - Multimedia embedding component
 - `site/` - Generated static HTML (created after build)
 
 ## Building the IETP
@@ -29,6 +32,7 @@ Output will be generated in `ietp/site/`:
 - `subsystem/57-{nn}.html` - Pages for each subsystem
 - `dm/DMC-*.html` - Individual data module pages
 - `site_index.json` - Search index for client-side search
+- `multimedia-demo.html` - Interactive demo of multimedia features
 
 ## Features
 
@@ -42,6 +46,17 @@ Output will be generated in `ietp/site/`:
 - **Quick search**: Search titles and DM keys
 - **Responsive design**: Works on desktop and mobile
 - **Status indicators**: Shows authored vs pending modules
+- **Multimedia embedding**: Video, audio, images with interactive controls
+- **Image zoom**: Click to view full-screen images
+- **Video controls**: Custom play overlays and responsive playback
+
+### Multimedia Features (NEW)
+- **Video embedding**: Responsive video playback with custom controls
+- **Audio playback**: Clean audio player with full controls
+- **Interactive images**: Click-to-zoom functionality for technical diagrams
+- **S1000D integration**: Automatic processing of multimedia object references
+- **Responsive containers**: Maintains aspect ratios across all devices
+- **Accessibility**: Keyboard navigation, ARIA labels, reduced motion support
 
 ### Information Code Mapping
 

@@ -57,7 +57,9 @@ LAYOUT = """<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>{title}</title>
 <link rel="stylesheet" href="../assets/css/ietp.css"/>
+<link rel="stylesheet" href="../assets/css/media-embed.css"/>
 <script defer src="../assets/js/ietp.js"></script>
+<script defer src="../assets/js/media-embed.js"></script>
 </head><body>
 <header class="topbar">
   <a class="brand" href="../index.html">BWB-H₂ Q100 IETP</a>
@@ -115,6 +117,7 @@ DM_PAGE = """<!doctype html>
 <title>{title}</title>
 <link rel="stylesheet" href="../assets/css/ietp.css"/>
 <link rel="stylesheet" href="../assets/css/gencms.css"/>
+<link rel="stylesheet" href="../assets/css/media-embed.css"/>
 </head><body>
 <header class="topbar">
   <a class="brand" href="../index.html">BWB-H₂ Q100 IETP</a>
@@ -136,6 +139,7 @@ DM_PAGE = """<!doctype html>
 </main>
 <footer class="foot">Generated from CSDB · MIC BWQ1 · ATA-57</footer>
 <script defer src="../assets/js/gencms.js"></script>
+<script defer src="../assets/js/media-embed.js"></script>
 </body></html>
 """
 
@@ -188,7 +192,7 @@ def extract_dm_title(dm_root) -> str:
         return "Untitled Data Module"
 
 def extract_dm_html(dm_root) -> str:
-    # Render simple <description> paras + randomList → <ul>
+    # Render simple <description> paras + randomList → <ul> + multimedia objects
     if dm_root is None:
         return '<p class="muted">No authored content yet.</p>'
     desc = dm_root.find(".//description")
@@ -209,7 +213,102 @@ def extract_dm_html(dm_root) -> str:
             for li in rl.findall("./listItem"):
                 out.append(f"<li>{safe(li.findtext('para') or '')}</li>")
             out.append("</ul>")
+        
+        # Check for multimedia objects
+        multimedia = lp.findall(".//multimedia")
+        for mm in multimedia:
+            out.append(render_multimedia_object(mm))
+    
+    # Also check for top-level multimedia in description
+    for mm in desc.findall(".//multimedia"):
+        out.append(render_multimedia_object(mm))
+    
     return "\n".join(out) or '<p class="muted">No text yet.</p>'
+
+def render_multimedia_object(mm_elem) -> str:
+    """Render S1000D multimedia object reference as HTML with media-embed support
+    
+    Note: Multimedia path mappings are configurable. In production, consider:
+    - Loading path mappings from a configuration file
+    - Validating file existence before generating references
+    - Supporting multiple file format fallbacks
+    """
+    try:
+        # Extract multimedia object code and type
+        mm_ref = mm_elem.find(".//multimediaObject")
+        if mm_ref is None:
+            return ""
+        
+        mm_code = mm_ref.get("multimediaCode", "")
+        mm_type = mm_ref.get("multimediaType", "image")
+        
+        # Multimedia directory path mappings (configurable)
+        # TODO: Consider loading from configuration file for production use
+        mm_path_map = {
+            "image": "../../multimedia/photos/",
+            "graphic": "../../multimedia/graphics/",
+            "video": "../../multimedia/videos/",
+            "audio": "../../multimedia/videos/",  # Often stored together
+            "animation": "../../multimedia/animations/",
+        }
+        
+        base_path = mm_path_map.get(mm_type, "../../multimedia/")
+        
+        # Default file extensions by type
+        # In production, validate file existence or support multiple formats
+        ext_map = {
+            "image": ".png",
+            "graphic": ".svg",
+            "video": ".mp4",
+            "audio": ".mp3",
+            "animation": ".mp4",
+        }
+        ext = ext_map.get(mm_type, ".png")
+        
+        # Construct full path
+        # TODO: In production, check if file exists and handle missing files gracefully
+        mm_path = f"{base_path}{mm_code}{ext}"
+        
+        # Get caption if available
+        caption_elem = mm_elem.find(".//multimediaCaption")
+        caption = ""
+        if caption_elem is not None and caption_elem.text:
+            caption = f'''<div class="media-caption">
+      <div class="caption-title">{safe(caption_elem.text)}</div>
+      <div class="caption-code">Multimedia Code: {safe(mm_code)}</div>
+    </div>'''
+        
+        # Generate HTML based on multimedia type
+        if mm_type in ["video", "animation"]:
+            return f'''<div class="media-embed-container">
+    <div data-s1000d-multimedia="video" data-multimedia-path="{mm_path}" data-multimedia-code="{safe(mm_code)}">
+      <video controls>
+        <source src="{mm_path}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    {caption}
+  </div>'''
+        elif mm_type == "audio":
+            return f'''<div class="media-embed-container">
+    <div data-s1000d-multimedia="audio" data-multimedia-path="{mm_path}" data-multimedia-code="{safe(mm_code)}">
+      <audio controls>
+        <source src="{mm_path}" type="audio/mpeg">
+        Your browser does not support the audio tag.
+      </audio>
+    </div>
+    {caption}
+  </div>'''
+        else:  # image, graphic
+            return f'''<div class="media-embed-container">
+    <div data-s1000d-multimedia="image" data-multimedia-path="{mm_path}" data-multimedia-code="{safe(mm_code)}">
+      <img src="{mm_path}" alt="{safe(mm_code)}" data-interactive="zoom">
+    </div>
+    {caption}
+  </div>'''
+    except Exception as e:
+        return f'<p class="media-error">Error rendering multimedia object: {safe(str(e))}</p>'
+
 
 # --- load DMRL and index -----------------------------------------------------
 def load_dm_requirements() -> list[dict]:

@@ -1,0 +1,411 @@
+/**
+ * MediaEmbed CSS - Styling for multimedia components in IETP
+ * Responsive design with dark theme compatibility
+ */
+
+:root {
+  --media-bg: #0b1019;
+  --media-border: #2a3441;
+  --media-control: #00d9ff;
+  --media-control-hover: #00b8d4;
+  --media-overlay: rgba(0, 0, 0, 0.7);
+  --media-text: #e4e9f0;
+}
+
+/* ============================================================================
+   Media Embed Container - Responsive wrapper for multimedia
+   ============================================================================ */
+
+.media-embed-container {
+  position: relative;
+  width: 100%;
+  max-width: var(--media-max-width, 100%);
+  margin: 1.5rem 0;
+  background: var(--media-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--media-border);
+}
+
+/* Aspect ratio preservation for video/image containers */
+.media-embed-container.media-embed-video,
+.media-embed-container.media-embed-image {
+  position: relative;
+  height: 0;
+  padding-bottom: 56.25%; /* Default 16:9 aspect ratio */
+}
+
+.media-embed-container.media-embed-video video,
+.media-embed-container.media-embed-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Audio container styling */
+.media-embed-container.media-embed-audio {
+  padding: 1rem;
+  height: auto;
+}
+
+.media-embed-container.media-embed-audio audio {
+  width: 100%;
+  height: 54px;
+}
+
+/* ============================================================================
+   Media Elements - Base styling for video, audio, and images
+   ============================================================================ */
+
+.media-embed-container video,
+.media-embed-container audio {
+  display: block;
+  background: var(--media-bg);
+  border-radius: 4px;
+}
+
+.media-embed-container img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Custom control styling for consistent look across browsers */
+video::-webkit-media-controls-panel,
+audio::-webkit-media-controls-panel {
+  background: var(--media-bg);
+}
+
+video::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-play-button {
+  background-color: var(--media-control);
+  border-radius: 50%;
+}
+
+/* ============================================================================
+   Play Overlay - Custom play button for videos
+   ============================================================================ */
+
+.play-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--media-overlay);
+  z-index: 10;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.play-overlay:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.play-button {
+  width: 80px;
+  height: 80px;
+  background: var(--media-control);
+  border: none;
+  border-radius: 50%;
+  color: var(--media-bg);
+  font-size: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 217, 255, 0.3);
+}
+
+.play-button:hover {
+  background: var(--media-control-hover);
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(0, 217, 255, 0.5);
+}
+
+.play-button:active {
+  transform: scale(0.95);
+}
+
+/* ============================================================================
+   Image Modal - Fullscreen zoom view
+   ============================================================================ */
+
+.media-embed-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-embed-modal .modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  cursor: pointer;
+}
+
+.media-embed-modal .modal-content {
+  position: relative;
+  max-width: 95vw;
+  max-height: 95vh;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-embed-modal .modal-content img {
+  max-width: 100%;
+  max-height: 95vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
+}
+
+.media-embed-modal .modal-close {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  background: var(--media-control);
+  color: var(--media-bg);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.media-embed-modal .modal-close:hover {
+  background: var(--media-control-hover);
+  transform: scale(1.1);
+}
+
+/* ============================================================================
+   Interactive Images - Hover and zoom effects
+   ============================================================================ */
+
+img[data-interactive="zoom"] {
+  cursor: zoom-in;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+img[data-interactive="zoom"]:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+}
+
+/* ============================================================================
+   Multimedia Captions and Metadata
+   ============================================================================ */
+
+.media-caption {
+  padding: 0.75rem 1rem;
+  background: var(--media-bg);
+  border-top: 1px solid var(--media-border);
+  color: var(--media-text);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.media-caption .caption-title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: var(--media-control);
+}
+
+.media-caption .caption-code {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: #8a95a5;
+  margin-top: 0.25rem;
+}
+
+/* ============================================================================
+   Multimedia Grid - Layout for multiple media items
+   ============================================================================ */
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.media-grid-item {
+  background: var(--media-bg);
+  border: 1px solid var(--media-border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.media-grid-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 217, 255, 0.15);
+}
+
+/* ============================================================================
+   S1000D Multimedia References
+   ============================================================================ */
+
+[data-s1000d-multimedia] {
+  margin: 1.5rem 0;
+}
+
+[data-s1000d-multimedia]:empty::before {
+  content: 'Loading multimedia...';
+  display: block;
+  padding: 2rem;
+  text-align: center;
+  color: #8a95a5;
+  font-style: italic;
+}
+
+/* ============================================================================
+   Responsive Breakpoints
+   ============================================================================ */
+
+/* Small screens - compact controls */
+.media-embed-small .play-button {
+  width: 60px;
+  height: 60px;
+  font-size: 1.5rem;
+}
+
+.media-embed-small .media-caption {
+  font-size: 0.85rem;
+  padding: 0.5rem 0.75rem;
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  .media-embed-container {
+    margin: 1rem 0;
+  }
+
+  .play-button {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .media-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .media-embed-modal .modal-close {
+    top: 10px;
+    right: 10px;
+  }
+}
+
+/* Tablet devices */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .media-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop - larger displays */
+@media (min-width: 1025px) {
+  .media-embed-container {
+    max-width: 900px;
+  }
+
+  .media-grid {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+}
+
+/* ============================================================================
+   Loading and Error States
+   ============================================================================ */
+
+.media-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: #8a95a5;
+}
+
+.media-loading::after {
+  content: '';
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--media-border);
+  border-top-color: var(--media-control);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  /* Additional visual indicator for accessibility */
+  box-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.media-error {
+  padding: 2rem;
+  text-align: center;
+  color: #ff4444;
+  background: rgba(255, 68, 68, 0.1);
+  border: 1px solid rgba(255, 68, 68, 0.3);
+  border-radius: 8px;
+}
+
+/* ============================================================================
+   Accessibility
+   ============================================================================ */
+
+/* Focus states for keyboard navigation */
+.play-button:focus,
+.modal-close:focus,
+video:focus,
+audio:focus {
+  outline: 2px solid var(--media-control);
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .play-button,
+  .media-grid-item,
+  img[data-interactive="zoom"],
+  .play-overlay {
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .media-embed-container {
+    border-width: 2px;
+  }
+
+  .play-button {
+    border: 2px solid currentColor;
+  }
+}
