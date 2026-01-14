@@ -54,6 +54,9 @@ Publication structure and data module requirements management.
 ### [Common Information Repository](modules/cir.md) (CIR)
 Shared terminology, references, and configuration data.
 
+### [Multimedia Embedding](modules/multimedia-embedding.md) (NEW)
+Interactive multimedia content including video, audio, and interactive images in IETP.
+
 ## 4. GenCMS (Generative Content Management System)
 
 The GenCMS provides AI-assisted content generation with S1000D compliance guardrails.
@@ -77,8 +80,11 @@ The IETP provides a web-based interface for browsing and managing S1000D content
 - Full-text search across titles and DM keys
 - Status indicators (authored vs pending)
 - Direct access to GenCMS for content generation
+- **Multimedia embedding** - Video, audio, and interactive images with responsive controls
+- **Click-to-zoom images** - Full-screen viewing of technical diagrams
+- **Responsive video playback** - Custom controls and aspect ratio preservation
 
-**See**: [IETP Usage Guide](modules/ietp.md)
+**See**: [IETP Usage Guide](modules/ietp.md) | [Multimedia Embedding Guide](modules/multimedia-embedding.md)
 
 ## 6. Validation & CI
 
