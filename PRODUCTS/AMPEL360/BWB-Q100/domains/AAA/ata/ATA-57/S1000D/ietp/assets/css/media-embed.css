@@ -359,6 +359,8 @@ img[data-interactive="zoom"]:hover {
   border-top-color: var(--media-control);
   border-radius: 50%;
   animation: spin 1s linear infinite;
+  /* Additional visual indicator for accessibility */
+  box-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
 }
 
 @keyframes spin {

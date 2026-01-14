@@ -197,7 +197,8 @@
      */
     embedAnimation(container, path, code) {
       // Determine if it's a video or image-based animation
-      const ext = path.split('.').pop().toLowerCase();
+      const extMatch = path.match(/\.([^.]+)$/);
+      const ext = extMatch ? extMatch[1].toLowerCase() : '';
       
       if (['mp4', 'webm', 'mov'].includes(ext)) {
         this.embedVideo(container, path, code);
@@ -289,7 +290,7 @@
       
       // Close handlers
       const close = () => {
-        document.body.removeChild(modal);
+        modal.remove(); // Safer than removeChild
         document.body.style.overflow = '';
       };
       

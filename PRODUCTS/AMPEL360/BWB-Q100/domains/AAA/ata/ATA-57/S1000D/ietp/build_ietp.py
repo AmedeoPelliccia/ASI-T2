@@ -226,7 +226,13 @@ def extract_dm_html(dm_root) -> str:
     return "\n".join(out) or '<p class="muted">No text yet.</p>'
 
 def render_multimedia_object(mm_elem) -> str:
-    """Render S1000D multimedia object reference as HTML with media-embed support"""
+    """Render S1000D multimedia object reference as HTML with media-embed support
+    
+    Note: Multimedia path mappings are configurable. In production, consider:
+    - Loading path mappings from a configuration file
+    - Validating file existence before generating references
+    - Supporting multiple file format fallbacks
+    """
     try:
         # Extract multimedia object code and type
         mm_ref = mm_elem.find(".//multimediaObject")
@@ -236,8 +242,8 @@ def render_multimedia_object(mm_elem) -> str:
         mm_code = mm_ref.get("multimediaCode", "")
         mm_type = mm_ref.get("multimediaType", "image")
         
-        # Try to find the path - in real S1000D this would be in ICN references
-        # For now, construct expected paths based on multimedia directory structure
+        # Multimedia directory path mappings (configurable)
+        # TODO: Consider loading from configuration file for production use
         mm_path_map = {
             "image": "../../multimedia/photos/",
             "graphic": "../../multimedia/graphics/",
@@ -248,7 +254,8 @@ def render_multimedia_object(mm_elem) -> str:
         
         base_path = mm_path_map.get(mm_type, "../../multimedia/")
         
-        # Common file extensions by type
+        # Default file extensions by type
+        # In production, validate file existence or support multiple formats
         ext_map = {
             "image": ".png",
             "graphic": ".svg",
@@ -258,7 +265,8 @@ def render_multimedia_object(mm_elem) -> str:
         }
         ext = ext_map.get(mm_type, ".png")
         
-        # Construct full path (this is a simple approach; real implementation would look up actual files)
+        # Construct full path
+        # TODO: In production, check if file exists and handle missing files gracefully
         mm_path = f"{base_path}{mm_code}{ext}"
         
         # Get caption if available
