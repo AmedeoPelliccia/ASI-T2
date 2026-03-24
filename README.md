@@ -17,12 +17,14 @@ ideale_pillars:
   - Energy
   - Aerospace
   - Logistics
-  - ESG
+  - Economy
   - Europe
 canonical_hash: pending
 ---
 
-# IDEALE.eu — Intelligence • Defense • Energy • Aerospace • Logistics • ESG
+# IDEALE.eu — Intelligence • Defense • Energy • Aerospace • Logistics • Economy
+
+> **TL;DR:** **IDEALE.eu** is an open, federated standards program that makes engineering artifacts (designs, SBOMs, attestations) **verifiable by default** across Europe’s strategic sectors. **ASI‑T2** is the reference implementation — a living repo you copy and adapt. *If it didn’t run in CI, it doesn’t count as evidence.*
 
 [**IDEALE.eu**](https://ideale.eu) is a federated **brand & standards** program for **verifiable critical systems**. We prioritize **evidence over assertions** and publish portable formats and vendor‑neutral CI hooks.
 
@@ -36,25 +38,29 @@ canonical_hash: pending
 
 ## 📚 Quick Nav
 
-- [What is IDEALE?](#what-is-ideale)
-- [Naming Canon](#naming-canon)
-- [IDEALE Evidence Framework (IEF)](#ideale-evidence-framework-ief)
-- [Visual Overview](#visual-overview)
-- [Sector Profiles](#sector-profiles)
-- [ASI‑T2 · Reference Implementation](#asit2-reference-implementation)
-- [Programs by Pillar · IDEALE](#programs-by-pillar-ideale)
-- [Evidence Objects](#evidence-objects)
-- [Conformance Ladder](#conformance-ladder)
-- [Roadmap Phases](#roadmap-phases)
-- [Deployment & GitHub Pages](./DEPLOYMENT.md)
-- [Contact & Pilots](#contact-pilots)
-- [Link Map](#link-map-for-clustered-keywords)
+- 🌐 [What is IDEALE?](#what-is-ideale)
+- 🏷️ [Naming Canon](#naming-canon)
+- 🔬 [IDEALE Evidence Framework (IEF)](#ideale-evidence-framework-ief)
+- 📊 [Visual Overview](#visual-overview)
+- 🏭 [Sector Profiles](#sector-profiles)
+- 🔭 [ASI‑T2 · Reference Implementation](#asit2-reference-implementation)
+- 🗂️ [Programs by Pillar · IDEALE](#programs-by-pillar-ideale)
+- 📋 [Evidence Objects](#evidence-objects)
+- 🪜 [Conformance Ladder](#conformance-ladder)
+- 🗺️ [Roadmap Phases](#roadmap-phases)
+- 📊 [Current Status](#current-status)
+- 🚀 [Quick Start](#quick-start)
+- 🤝 [Contributing](#contributing)
+- 📖 [Key Acronyms](#key-acronyms)
+- 🌍 [Deployment & GitHub Pages](./DEPLOYMENT.md)
+- 📬 [Contact & Pilots](#contact-pilots)
+- 🔗 [Link Map](#link-map-for-clustered-keywords)
 
 ---
 
 ## What is IDEALE?
 
-**IDEALE.eu** is an open **brand + standards** initiative that enables **verifiability** across Europe’s strategic sectors (Intelligence, Defense, Energy, Aerospace, Logistics, ESG). The specifications let teams produce **verifiable artifacts** that travel between tools and organizations without vendor lock‑in.
+**IDEALE.eu** is an open **brand + standards** initiative that enables **verifiability** across Europe’s strategic sectors (Intelligence, Defense, Energy, Aerospace, Logistics, Economy). The specifications let teams produce **verifiable artifacts** that travel between tools and organizations without vendor lock‑in.
 
 > **Bridge flow · TFA canon:** **QS→FWD→UE→FE→CB→QB**.
 
@@ -110,7 +116,7 @@ graph TD
     ENE[Propulsion-and-Grids Energy]
     A[AMPEL360 Aerospace]
     L[INFRANET Logistics]
-    ESG[Commitment ESG]
+    ECO[Economy ESG-and-Justice]
   end
 
   IDEALE --> I
@@ -118,7 +124,7 @@ graph TD
   IDEALE --> ENE
   IDEALE --> A
   IDEALE --> L
-  IDEALE --> ESG
+  IDEALE --> ECO
 
   %% Aerospace canon
   A --> AT[AMPEL360 Air Transport]
@@ -184,8 +190,8 @@ Profiles specialize IEF per regulatory domain. First up:
 * **L · INFRANET — Logistics**
   Supply, maintenance, delivery chains and runtime packaging. Includes **AQUA_OS_AIRCRAFT**, **LH2_CORRIDOR**.
 
-* **E · Commitment — ESG**
-  Ethics, sustainability and trust‑mark. **MAL‑EEM**, data classification, privacy, export control.
+* **E · Economy — ESG & Justice**
+  Economic sustainability, equity and trust‑mark for EU inhabitants. Covers ESG commitments, climate-aligned finance, social redistribution, **MAL‑EEM** ethics guard, data classification, privacy, and export control.
 
 ---
 
@@ -273,6 +279,90 @@ classification: INTERNAL–EVIDENCE-REQUIRED
 
 ---
 
+## Current Status
+
+> See the full timeline in [ROADMAP.md](./ROADMAP.md).
+
+**Phase 1 — Foundation** is underway. Key milestones:
+
+| Area | Status |
+| ---- | ------ |
+| Charter, Governance, Code of Conduct | ✅ Published |
+| UTCS/CXP schema & SPDX baseline | 🔄 In progress |
+| Verify CI action & Badge endpoint | 🔄 In progress |
+| TSC membership & RFC process | 📋 Planned |
+| Verification-as-a-Service (SaaS) | 📋 Planned (Phase 2) |
+
+**Open gaps where contributors can help:**
+- 🔲 BREX rule authoring for the TFA aerospace profile
+- 🔲 Quantum (QAIM-2) solver integration examples
+- 🔲 SLSA Level 3 build provenance wiring
+
+---
+
+## Quick Start
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/AmedeoPelliccia/ASI-T2.git
+cd ASI-T2
+
+# 2. Install Python dependencies
+pip install -r requirements.txt
+
+# 3. Validate all manifests and run policy checks
+python scripts/derive_struct_from_readmes.py --check
+
+# 4. Run the test suite
+python -m pytest tools/
+
+# 5. (Optional) Run pre-commit hooks
+pre-commit run --all-files
+```
+
+See [INSTALLATION.md](./INSTALLATION.md) for full environment setup instructions.
+
+---
+
+## Contributing
+
+We welcome contributions from engineers, researchers, and policy experts!
+
+- 📖 Read [CONTRIBUTING.md](./CONTRIBUTING.md) for the full contribution guide.
+- 🐛 Browse [open issues](https://github.com/AmedeoPelliccia/ASI-T2/issues) — look for `good-first-issue` and `help-wanted` tags.
+- 🔲 Check the **Open gaps** listed in [Current Status](#current-status) for high-impact starting points.
+- 🔒 Review our [PR Minimum Checklist](./CONTRIBUTING.md#code-review) before submitting.
+- 💬 Ask questions in [GitHub Discussions](https://github.com/AmedeoPelliccia/ASI-T2/discussions).
+
+---
+
+## Key Acronyms
+
+| Acronym | Meaning |
+| ------- | ------- |
+| **IDEALE** | Intelligence · Defense · Energy · Aerospace · Logistics · Economy |
+| **IEF** | IDEALE Evidence Framework |
+| **ASI‑T2** | Super-Transposer Intelligence T2 (reference implementation) |
+| **TFA** | Transatlantic Federation Architecture (Aerospace domain profile) |
+| **UTCS** | Universal Technical Context Stamp |
+| **CXP** | Context eXchange Point |
+| **SBOM** | Software Bill of Materials |
+| **SPDX** | Software Package Data Exchange |
+| **SLSA** | Supply-chain Levels for Software Artifacts |
+| **CAX** | Computer-Aided X (CAD, CFD, FEA, …) |
+| **QOX** | Quantum Optimization eXecution |
+| **PAX** | Packaging & Application eXchange |
+| **ATA** | Air Transport Association chapter system |
+| **QAIM** | Quantum-AI Integration Module |
+| **QUBO** | Quadratic Unconstrained Binary Optimization |
+| **QAOA** | Quantum Approximate Optimization Algorithm |
+| **VQE** | Variational Quantum Eigensolver |
+| **MAL‑EEM** | Multi-Agent Logic with Ethics and Empathy Module |
+| **BWB** | Blended-Wing Body (AMPEL360 model) |
+| **GAIA** | Global Autonomous Intelligence Architecture |
+
+---
+
 ## Contact & Pilots
 
 Interested in a 2‑week pilot (Aerospace · Energy · Defense · Logistics)?
@@ -308,13 +398,3 @@ Interested in a 2‑week pilot (Aerospace · Energy · Defense · Logistics)?
 * **Roadmap** → #roadmap-phases
 * **Contact & Pilots** → #contact-pilots
 * **SPDX** → [https://spdx.dev](https://spdx.dev)
-
-```
-```
-
-
-
-
-
-
-
