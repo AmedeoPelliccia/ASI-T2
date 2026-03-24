@@ -17,12 +17,12 @@ ideale_pillars:
   - Energy
   - Aerospace
   - Logistics
-  - ESG
+  - Economy
   - Europe
 canonical_hash: pending
 ---
 
-# IDEALE.eu — Intelligence • Defense • Energy • Aerospace • Logistics • ESG
+# IDEALE.eu — Intelligence • Defense • Energy • Aerospace • Logistics • Economy
 
 > **TL;DR:** **IDEALE.eu** is an open, federated standards program that makes engineering artifacts (designs, SBOMs, attestations) **verifiable by default** across Europe’s strategic sectors. **ASI‑T2** is the reference implementation — a living repo you copy and adapt. *If it didn’t run in CI, it doesn’t count as evidence.*
 
@@ -60,7 +60,7 @@ canonical_hash: pending
 
 ## What is IDEALE?
 
-**IDEALE.eu** is an open **brand + standards** initiative that enables **verifiability** across Europe’s strategic sectors (Intelligence, Defense, Energy, Aerospace, Logistics, ESG). The specifications let teams produce **verifiable artifacts** that travel between tools and organizations without vendor lock‑in.
+**IDEALE.eu** is an open **brand + standards** initiative that enables **verifiability** across Europe’s strategic sectors (Intelligence, Defense, Energy, Aerospace, Logistics, Economy). The specifications let teams produce **verifiable artifacts** that travel between tools and organizations without vendor lock‑in.
 
 > **Bridge flow · TFA canon:** **QS→FWD→UE→FE→CB→QB**.
 
@@ -116,7 +116,7 @@ graph TD
     ENE[Propulsion-and-Grids Energy]
     A[AMPEL360 Aerospace]
     L[INFRANET Logistics]
-    ESG[Commitment ESG]
+    ECO[Economy ESG-and-Justice]
   end
 
   IDEALE --> I
@@ -124,7 +124,7 @@ graph TD
   IDEALE --> ENE
   IDEALE --> A
   IDEALE --> L
-  IDEALE --> ESG
+  IDEALE --> ECO
 
   %% Aerospace canon
   A --> AT[AMPEL360 Air Transport]
@@ -190,8 +190,8 @@ Profiles specialize IEF per regulatory domain. First up:
 * **L · INFRANET — Logistics**
   Supply, maintenance, delivery chains and runtime packaging. Includes **AQUA_OS_AIRCRAFT**, **LH2_CORRIDOR**.
 
-* **E · Commitment — ESG**
-  Ethics, sustainability and trust‑mark. **MAL‑EEM**, data classification, privacy, export control.
+* **E · Economy — ESG & Justice**
+  Economic sustainability, equity and trust‑mark for EU inhabitants. Covers ESG commitments, climate-aligned finance, social redistribution, **MAL‑EEM** ethics guard, data classification, privacy, and export control.
 
 ---
 
@@ -340,7 +340,7 @@ We welcome contributions from engineers, researchers, and policy experts!
 
 | Acronym | Meaning |
 | ------- | ------- |
-| **IDEALE** | Intelligence · Defense · Energy · Aerospace · Logistics · ESG |
+| **IDEALE** | Intelligence · Defense · Energy · Aerospace · Logistics · Economy |
 | **IEF** | IDEALE Evidence Framework |
 | **ASI‑T2** | Super-Transposer Intelligence T2 (reference implementation) |
 | **TFA** | Transatlantic Federation Architecture (Aerospace domain profile) |
